@@ -5,13 +5,14 @@ import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import {
   Users, Wallet, FileText, LayoutDashboard, LogOut,
-  Tags, Calculator, Receipt, BookOpen, Menu, X, Megaphone,
+  Tags, Calculator, Receipt, BookOpen, Menu, X, Megaphone, Video,
 } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 
 const NAV = [
   { href: "/dashboard", label: "Gelir Tablosu", icon: LayoutDashboard },
   { href: "/customers", label: "Müşteriler", icon: Users },
+  { href: "/meetings", label: "Toplantılar", icon: Video },
   { href: "/ad-performance", label: "Reklam Performansı", icon: Megaphone },
   { href: "/payments", label: "Ödemeler", icon: Wallet },
   { href: "/revenue", label: "Ciro / Komisyon", icon: Calculator },

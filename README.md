@@ -162,6 +162,22 @@ Yeni eklenen: **Reklam Performansı** ekranı — her müşteri için Google Ads
 5. Kaydedin — DNS yayılması birkaç dakika ile birkaç saat sürebilir
 6. Vercel otomatik olarak SSL sertifikası oluşturacak; Domains sayfasında yeşil "Valid Configuration" yazısını gördüğünüzde `https://app.dynoops.com.tr` üzerinden erişebilirsiniz
 
+## Güncelleme: Toplantı Planlama (6. sürüm)
+
+Yeni bir SQL dosyası çalıştırmanız gerekiyor:
+
+1. Supabase → **SQL Editor** → **New query**
+2. `supabase/migration_5_toplantilar.sql` dosyasının tamamını yapıştırıp **Run** deyin
+
+Yeni eklenen: **Toplantılar** ekranı.
+
+**Nasıl çalışır (Google API kurulumu gerektirmeyen hızlı yöntem):**
+1. Panelde "Yeni Toplantı" ile müşteri, başlık, tarih/saat, katılımcı e-postası girip kaydedin
+2. "Google Calendar'da Oluştur" butonuna tıklayın — Google Calendar, bu bilgilerle önceden doldurulmuş yeni etkinlik ekranını açar
+3. O ekranda **"Google Meet video konferansı ekle"** butonuna tıklayın, Calendar otomatik bir Meet linki oluşturur
+4. Oluşan linki kopyalayıp panele dönüp toplantıyı düzenleyin, **Google Meet Linki** alanına yapıştırıp kaydedin
+5. Artık listede "Katıl" butonu ile doğrudan Meet linkine gidebilirsiniz
+
 ## Özellikler
 
 - **Gelir Tablosu**: aktif müşteri sayısı, aylık sabit gelir, tahsilat/bekleyen özet kartları, son 6 aylık grafik, geciken ödemeler listesi
