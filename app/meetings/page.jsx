@@ -22,17 +22,25 @@ const emptyMeeting = (customerId) => ({
 });
 
 function buildGoogleCalendarUrl(m) {
-  const start = new Date(`${m.date}T${m.time}:00`);
-  const end = new Date(start.getTime() + (Number(m.duration_minutes) || 30) * 60000);
-  const fmt = (d) => d.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
-  const params = new URLSearchParams({
-    action: "TEMPLATE",
-    text: m.title || "Dynoops Toplantısı",
-    dates: `${fmt(start)}/${fmt(end)}`,
-    details: (m.note || "") + "\n\nGoogle Meet eklemek için etkinlik ekranında 'Google Meet video konferansı ekle' butonuna tıklayın, oluşan linki kopyalayıp panele geri yapıştırın.",
-  });
-  if (m.attendee_email) params.append("add", m.attendee_email);
-  return `https://calendar.google.com/calendar/render?${params.toString()}`;
+  try {
+    const timeStr = (m.time || "10:00").toString().slice(0, 5);
+    const start = new Date(`${m.date}T${timeStr}:00`);
+    if (isNaN(start.getTime())) {
+      return "https://calendar.google.com/calendar/render?action=TEMPLATE";
+    }
+    const end = new Date(start.getTime() + (Number(m.duration_minutes) || 30) * 60000);
+    const fmt = (d) => d.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
+    const params = new URLSearchParams({
+      action: "TEMPLATE",
+      text: m.title || "Dynoops Toplantısı",
+      dates: `${fmt(start)}/${fmt(end)}`,
+      details: (m.note || "") + "\n\nGoogle Meet eklemek için etkinlik ekranında 'Google Meet video konferansı ekle' butonuna tıklayın, oluşan linki kopyalayıp panele geri yapıştırın.",
+    });
+    if (m.attendee_email) params.append("add", m.attendee_email);
+    return `https://calendar.google.com/calendar/render?${params.toString()}`;
+  } catch (e) {
+    return "https://calendar.google.com/calendar/render?action=TEMPLATE";
+  }
 }
 
 const statusBadge = (status) => {
@@ -169,7 +177,7 @@ export default function MeetingsPage() {
 }
 
 function MeetingForm({ initial, customers, onSave, onCancel }) {
-  const [f, setF] = useState(initial);
+  const [f, setF] = useState({ ...initial, time: (initial.time || "10:00").toString().slice(0, 5) });
   const set = (k) => (e) => setF({ ...f, [k]: e.target.value });
 
   const onCustomerChange = (e) => {
