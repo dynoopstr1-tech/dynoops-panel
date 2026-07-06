@@ -1,0 +1,76 @@
+/* Dynoops — Metronic tabanlı özel ekler.
+   Ana bileşen stilleri (card, table, btn, badge, form-*, menu) Metronic'in
+   style.bundle.css dosyasından geliyor. Burada sadece Metronic'te
+   karşılığı olmayan küçük özel parçalar tanımlanır. */
+
+.app-content-area { padding: 24px 24px 48px; }
+@media (max-width: 991.98px) { .app-content-area { padding: 16px; } }
+
+/* Mobil kayar menü (Metronic'in jQuery drawer'ı yerine kendi React state'imiz) */
+@media (max-width: 991.98px) {
+  #kt_app_sidebar {
+    display: flex !important;
+    position: fixed !important; left: 0; top: 0; height: 100vh;
+    transform: translateX(-105%);
+    transition: transform 0.22s ease;
+    z-index: 105;
+  }
+  #kt_app_sidebar.sidebar-open { transform: translateX(0); }
+  .app-sidebar-logo { display: flex !important; }
+  .app-mobile-topbar { display: flex !important; }
+}
+.app-mobile-topbar { display: none; align-items: center; justify-content: space-between; padding: 10px 16px; position: sticky; top: 0; z-index: 60; background: #1e2129; }
+.app-mobile-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 100; }
+
+/* Sektör dağılımı satırı (Bootstrap progress ile) */
+.sector-row { display: grid; grid-template-columns: 120px 1fr 70px; align-items: center; gap: 10px; margin-bottom: 10px; }
+.sector-row:last-child { margin-bottom: 0; }
+
+/* Kategori renk noktası */
+.cat-dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; margin-right: 6px; flex-shrink: 0; }
+
+/* Renk seçici (gider kategorisi) */
+.color-picker-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.color-swatch { width: 28px; height: 28px; border-radius: 8px; border: 2px solid transparent; cursor: pointer; padding: 0; }
+.color-swatch-active { border-color: var(--bs-dark); }
+.color-custom-input { width: 36px; height: 28px; border: 1px solid var(--bs-gray-300); border-radius: 8px; background: transparent; cursor: pointer; padding: 0; }
+
+/* Ödeme tipi seçici */
+.payment-type-option { display: flex; align-items: center; gap: 8px; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--bs-gray-300); font-size: 13px; cursor: pointer; }
+.payment-type-option-active { border-color: var(--bs-primary); background: var(--bs-primary-bg-subtle); }
+
+/* Giriş ekranı */
+.login-page-wrap { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: #1e2129; padding: 20px; }
+
+/* Teklif yazdırma çıktısı — orijinal Dynoops PDF şablonuna uygun, admin temasından bağımsız */
+.print-only-area { display: none; }
+.proposal-print {
+  background: white; color: #1a1a1a; padding: 40px 44px; font-family: Arial, sans-serif;
+  max-width: 780px; margin: 0 auto;
+}
+.pp-header { margin-bottom: 20px; }
+.pp-logo-img { height: 32px; width: auto; }
+.pp-title { font-size: 24px; font-weight: 700; text-align: center; margin: 30px 0 6px; color: #12294A; }
+.pp-date { text-align: center; color: #667; font-size: 12px; margin-bottom: 20px; }
+.pp-intro { font-size: 13px; line-height: 1.6; margin-bottom: 14px; }
+.pp-bullets { padding-left: 18px; font-size: 12.5px; line-height: 1.7; margin-bottom: 16px; }
+.pp-bullets li { margin-bottom: 6px; }
+.pp-sub { font-weight: 700; font-size: 13.5px; margin: 18px 0 10px; color: #12294A; }
+.pp-cat { margin-bottom: 14px; }
+.pp-cat-title { font-weight: 700; font-size: 12.5px; margin-bottom: 5px; }
+.pp-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-bottom: 6px; }
+.pp-table td { border: 1px solid #ccc; padding: 7px 10px; }
+.pp-price { width: 130px; }
+.pp-total-table { margin-top: 10px; }
+.pp-total-price, .pp-total-table td { font-weight: 700; color: #C0392B; }
+.pp-pricing-title { font-weight: 700; font-size: 12.5px; margin-bottom: 3px; }
+.pp-pricing-desc { font-size: 11.5px; color: #444; line-height: 1.5; }
+.pp-special-row td { font-size: 14px; }
+.pp-footer { margin-top: 40px; font-size: 11px; font-weight: 700; color: #12294A; display: flex; flex-direction: column; gap: 2px; }
+
+@media print {
+  body * { visibility: hidden; }
+  #proposal-print-area, #proposal-print-area * { visibility: visible; }
+  #proposal-print-area { position: absolute; left: 0; top: 0; width: 100%; padding: 0 20px; }
+  .print-only-area { display: block; }
+}
